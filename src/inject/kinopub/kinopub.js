@@ -8,6 +8,7 @@ var ready = function() {
 
   selectFile.style.width = '150px'
   selectFile.style.height = '35px'
+  selectFile.style.marginLeft = '5px'
   selectFile.className = 'form-control'
 
   selectFile.onchange = function() {
@@ -40,7 +41,7 @@ var ready = function() {
   button.style.maxWidth = '35px'
   button.style.maxHeight = '35px'
   button.style.padding = '5px'
-  button.style.marginLeft = '5px'
+  button.style.marginLeft = '10px'
   button.className = 'form-control'
 
   let btnWrapper = document.createElement('div')
