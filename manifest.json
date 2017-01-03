@@ -1,0 +1,35 @@
+{
+  "name": "Broaden",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Adds chromecast support to some sites that don't have it",
+  "homepage_url": "https://andv.xyz/broaden",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://kadu.ru/video/*"
+      ],
+      "js": [
+        "src/inject/cast.js",
+        "src/inject/kadu/inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "src/inject/broaden.js",
+    "src/inject/kadu/kadu.js"
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com; object-src 'self'"
+}
