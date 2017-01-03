@@ -1,0 +1,5 @@
+console.log('[kinopub injector] Loading kinopub injector')
+var scriptElement = document.createElement('script')
+scriptElement.setAttribute('type', 'text/javascript')
+scriptElement.setAttribute('src', chrome.extension.getURL('src/inject/kinopub/kinopub.js'))
+document.head.appendChild(scriptElement)
