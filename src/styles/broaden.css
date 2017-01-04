@@ -1,3 +1,7 @@
+broaden {
+  z-index: 9999;
+}
+
 broaden-inner * {
   padding: 0;
   margin: 0;
@@ -7,6 +11,8 @@ broaden-inner * {
 }
 
 broaden-inner {
+  z-index: 9999;
+
   position: fixed;
 
   width: 400px;
