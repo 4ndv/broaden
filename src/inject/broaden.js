@@ -64,7 +64,7 @@ var everythingReady = function() {
         switch (event.sessionState) {
           case cast.framework.SessionState.SESSION_STARTED:
             console.log('[broaden] Starting cast')
-            window.broadenStartCast()
+            //window.broadenStartCast()
             break
           case cast.framework.SessionState.SESSION_RESUMED:
             break
@@ -96,9 +96,9 @@ var everythingExceptGUIReady = function() {
   }
 }
 
-window.broadenStartCast = function() {
+window.broadenStartCast = function(data) {
   var castSession = cast.framework.CastContext.getInstance().getCurrentSession()
-  var mediaInfo = new chrome.cast.media.MediaInfo(window.broadencast.broadenData.src, window.broadencast.broadenData.mime)
+  var mediaInfo = new chrome.cast.media.MediaInfo(data.src, data.mime)
   var request = new chrome.cast.media.LoadRequest(mediaInfo)
   castSession.loadMedia(request).then(
     function() { console.log('[broaden] Load succeed') },

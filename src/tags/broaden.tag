@@ -22,9 +22,11 @@
       </div>
       <div if={ state.castState === cast.framework.CastState.CONNECTED }>
         <div class="broaden-inline">
-          <p>Connected</p>
           <button onclick={ disconnect } class="pure-button">Disconnect</button>
         </div>
+      </div>
+      <div if={ state.sessionState === cast.framework.SessionState.SESSION_STARTED }>
+        
       </div>
     </section>
   </broaden-inner>
@@ -32,7 +34,8 @@
   <script>
     this.state = {
       castState: false,
-      sessionState: false
+      sessionState: false,
+      media: false
     }
 
     updateState(newState) {
