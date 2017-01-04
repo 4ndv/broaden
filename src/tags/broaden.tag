@@ -54,6 +54,7 @@
       castState: false,
       sessionState: false,
       media: false,
+      player: false,
       files: []
     }
 

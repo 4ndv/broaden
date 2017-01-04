@@ -1,20 +1,4 @@
 var ready = function() {
-  // let sources = []
-
-  // let selectFile = document.createElement('select')
-
-  // selectFile.style.width = '150px'
-  // selectFile.style.height = '35px'
-
-  // selectFile.onchange = function() {
-  //   let obj = {
-  //     src: this.value,
-  //     mime: 'video/mp4'
-  //   }
-
-  //   window.broadenDataCallback(obj)
-  // }
-
   let tracks = document.querySelectorAll('.mejs-soundtracks-selector > ul > li').length
 
   files = []
@@ -33,49 +17,7 @@ var ready = function() {
         mime: 'video/mp4'
       })
     }
-  }  
-
-  // if(tracks === 0) {
-  //   let opt = document.createElement('option')
-  //   opt.selected = 'true'
-  //   opt.innerHTML = 'File 1'
-  //   opt.value = document.querySelector('#video-flash').src
-  //   selectFile.append(opt)
-  // } else {
-  //   for(var i = 0; i < tracks; i++) {
-  //     let opt = document.createElement('option')
-  //     opt.innerHTML = 'File ' + (i + 1)
-      
-  //     if(i === 0) {
-  //       opt.value = document.querySelector('#video-flash').src
-  //       opt.selected = 'true'
-  //     } else {
-  //       opt.value = document.querySelector('#video-flash').src + "?stream=" + (i + 1)
-  //     }
-
-  //     selectFile.append(opt)
-  //   }
-  // }
-
-  // let wrapper = document.createElement('div')
-  // wrapper.className = 'counter'
-  // wrapper.append(selectFile)
-
-  // document.getElementById('video-counters').append(wrapper)
-
-  // let button = document.createElement('button', 'google-cast-button')
-
-  // button.style.width = '35px'
-  // button.style.height = '35px'
-  // button.style.marginLeft = '10px'
-
-  // document.getElementById('video-counters').append(button)
-
-  // let obj = {
-  //   //sources: sources
-  //   src: document.querySelector('#video-flash').src,
-  //   mime: 'video/mp4'
-  // }
+  }
 
   window.broadenReadyCallback(files)
 }
