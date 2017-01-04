@@ -36,9 +36,21 @@
       <div if={ state.castState === cast.framework.CastState.CONNECTED }>
         <div if={ state.sessionState === cast.framework.SessionState.SESSION_STARTED || state.sessionState === cast.framework.SessionState.SESSION_RESUMED }>
           <div if={ state.player.isMediaLoaded || state.player.playerState === chrome.cast.media.PlayerState.IDLE }>
-            <div>
+            <div class="broaden-inline">
               <button class="pure-button pure-button-primary broaden-fw-70" onclick={ controlsPlayPause }>{ state.player.isPaused ? 'Play' : 'Pause' }</button>
               <button class="pure-button pure-button-primary" onclick={ controlsStop }>Stop</button>
+              <button class="pure-button pure-button-primary broaden-fw-90" onclick={ controlsMuteUnmute }>{ state.player.isMuted ? 'Unmute' : 'Mute' }</button>
+            </div>
+            <br />
+            <div class="broaden-inline">
+              <label>Volume:</label>
+              <input class="broaden-range" type="range" onchange={ controlsVolume } min="0" max="10" value={ state.player.volumeLevel * 10 } />
+            </div>
+            <br />
+            <div class="broaden-inline">
+              <label>{ timeToString(state.player.currentTime) }</label>
+              <input class="broaden-range" type="range" onchange={ controlsTime } min="0" max={ state.player.duration } value={ state.player.currentTime*1000/1000 } />
+              <label>{ timeToString(state.player.duration) }</label>
             </div>
           </div>
         </div>
@@ -55,6 +67,7 @@
       sessionState: false,
       media: false,
       player: false,
+      finishing: false,
       files: []
     }
 
@@ -62,8 +75,22 @@
       this.state.controller.playOrPause()
     }
 
+    controlsMuteUnmute() {
+      this.state.controller.muteOrUnmute()
+    }
+
     controlsStop() {
       this.disconnect()
+    }
+
+    controlsVolume(e) {
+      this.state.player.volumeLevel = (+e.target.value) / 10
+      this.state.controller.setVolumeLevel()
+    }
+
+    controlsTime(e) {
+      this.state.player.currentTime = (+e.target.value)
+      this.state.controller.seek()
     }
 
     playSelectedFile() {
@@ -80,6 +107,18 @@
         function(errorCode) { alert('[broaden] Error code: ' + errorCode) });
     }
 
+    timeToString(time) {
+      let sec_num = parseInt(time, 10); // don't forget the second param
+      let hours   = Math.floor(sec_num / 3600);
+      let minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+      let seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+      if (hours   < 10) {hours   = "0"+hours;}
+      if (minutes < 10) {minutes = "0"+minutes;}
+      if (seconds < 10) {seconds = "0"+seconds;}
+      return hours+':'+minutes+':'+seconds;
+    }
+
     updateState(newState) {
       Object.assign(this.state, this.state, newState)
       this.update()
@@ -89,6 +128,18 @@
       let session = cast.framework.CastContext.getInstance().getCurrentSession()
 
       session.endSession(true)
+
+      // Must delay it to deal with errors
+      setTimeout(() => {
+        this.state.finishing = false
+      }, 500)
+    }
+
+    disconnectIfNeed() {
+      if(this.state.player.isConnected && this.state.player.playerState === chrome.cast.media.PlayerState.IDLE && this.state.player.mediaInfo === null && !this.state.finishing) {
+          this.state.finishing = true
+          this.disconnect()
+        }
     }
 
     this.on('mount', function() {
@@ -109,8 +160,8 @@
     })
 
     this.on('updatestate', function(state) {
-      console.log('[broaden gui] State changed')
       this.updateState(state)
+      this.disconnectIfNeed()
     })
 
     this.on('shouldupdate', function() {

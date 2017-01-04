@@ -71,7 +71,15 @@ broaden-inner .broaden-inline {
   align-items: center;
 }
 
+broaden-inner .broaden-inline > * {
+  margin-right: 3px;
+}
+
 broaden-inner .broaden-fw-70 {
+  width: 70px;
+}
+
+broaden-inner .broaden-fw-90 {
   width: 70px;
 }
 
@@ -79,8 +87,8 @@ broaden-inner .broaden-pw-100 {
   width: 100%;
 }
 
-broaden-inner .broaden-inline > * {
-  display: inline-flex;
+broaden-inner .broaden-range {
+  width: 100%;
 }
 
 broaden-inner .broaden-preloader {
