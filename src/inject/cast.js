@@ -7,6 +7,7 @@
 
   let styles = [
     chrome.extension.getURL('src/styles/broaden.css'),
+    chrome.extension.getURL('src/styles/pure-min.css')
   ]
 
   styles.forEach((item) => {

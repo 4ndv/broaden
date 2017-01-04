@@ -38,6 +38,10 @@ broaden-inner > section {
   background: #fff;
 }
 
+broaden-inner button {
+  box-shadow: none;
+}
+
 broaden-inner .broaden-castbutton {
   width: 100%;
   height: 35px;

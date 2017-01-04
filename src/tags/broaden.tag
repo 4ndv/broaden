@@ -11,7 +11,7 @@
       <div if={ state.castState === cast.framework.CastState.NOT_CONNECTED }>
         <div class="broaden-inline">
           <p>Press this button to connect:</p>
-          <button class="broaden-castbutton" is="google-cast-button"></button>
+          <button class="broaden-castbutton pure-button" is="google-cast-button"></button>
         </div>
       </div>
       <div if={ state.castState === cast.framework.CastState.CONNECTING }>
@@ -23,7 +23,7 @@
       <div if={ state.castState === cast.framework.CastState.CONNECTED }>
         <div class="broaden-inline">
           <p>Connected</p>
-          <button onclick={ disconnect }>Disconnect</button>
+          <button onclick={ disconnect } class="pure-button">Disconnect</button>
         </div>
       </div>
     </section>
