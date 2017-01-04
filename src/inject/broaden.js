@@ -99,7 +99,7 @@ var everythingExceptGUIReady = function() {
 
     everythingReady()
   } else {
-    console.log('[broaden] Waiting for Cast API and Broaden injected script')
+    console.log('[broaden] Waiting for Cast API, Riot and Broaden injected script')
     setTimeout(everythingExceptGUIReady, 1000)
   }
 }

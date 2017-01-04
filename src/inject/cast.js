@@ -34,9 +34,9 @@
   console.log('[broaden injector] Injecting scripts')
 
   let scripts = [
-    chrome.extension.getURL('src/inject/broaden.js'),
+    chrome.extension.getURL('src/3rdparty/riot+compiler.min.js'),
     'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1',
-    chrome.extension.getURL('src/3rdparty/riot+compiler.min.js')
+    chrome.extension.getURL('src/inject/broaden.js')
   ]
 
   scripts.forEach((item) => {

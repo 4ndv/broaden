@@ -9,7 +9,6 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "default_locale": "en",
   "permissions": [
     "tabs",
     "http://*/*",
@@ -33,6 +32,17 @@
       "js": [
         "src/inject/cast.js",
         "src/inject/kinopub/inject.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://smotret-anime.ru/catalog/*/*/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "src/inject/cast.js",
+        "src/inject/smotret-anime/inject.js"
       ],
       "run_at": "document_end"
     }
