@@ -1,6 +1,8 @@
 var ready = function() {
   // let sources = []
 
+  window.broadenReadyCallback()
+
   let selectFile = document.createElement('select')
 
   selectFile.style.width = '150px'
@@ -12,7 +14,7 @@ var ready = function() {
       mime: 'video/mp4'
     }
 
-    window.broadenReadyCallback(obj)
+    window.broadenDataCallback(obj)
   }
 
   let tracks = document.querySelectorAll('.mejs-soundtracks-selector > ul > li').length

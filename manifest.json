@@ -38,9 +38,7 @@
     }
   ],
   "web_accessible_resources": [
-    "src/inject/broaden.js",
-    "src/inject/kadu/kadu.js",
-    "src/inject/kinopub/kinopub.js"
+    "src/**/*.*"
   ],
   "content_security_policy": "script-src 'self' https://www.gstatic.com; object-src 'self'"
 }
