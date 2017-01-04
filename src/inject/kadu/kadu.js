@@ -1,67 +1,83 @@
 var ready = function() {
   // let sources = []
 
-  window.broadenReadyCallback()
+  // let selectFile = document.createElement('select')
 
-  let selectFile = document.createElement('select')
+  // selectFile.style.width = '150px'
+  // selectFile.style.height = '35px'
 
-  selectFile.style.width = '150px'
-  selectFile.style.height = '35px'
+  // selectFile.onchange = function() {
+  //   let obj = {
+  //     src: this.value,
+  //     mime: 'video/mp4'
+  //   }
 
-  selectFile.onchange = function() {
-    let obj = {
-      src: this.value,
-      mime: 'video/mp4'
-    }
-
-    window.broadenDataCallback(obj)
-  }
+  //   window.broadenDataCallback(obj)
+  // }
 
   let tracks = document.querySelectorAll('.mejs-soundtracks-selector > ul > li').length
 
-  if(tracks === 0) {
-    let opt = document.createElement('option')
-    opt.selected = 'true'
-    opt.innerHTML = 'File 1'
-    opt.value = document.querySelector('#video-flash').src
-    selectFile.append(opt)
-  } else {
-    for(var i = 0; i < tracks; i++) {
-      let opt = document.createElement('option')
-      opt.innerHTML = 'File ' + (i + 1)
-      
-      if(i === 0) {
-        opt.value = document.querySelector('#video-flash').src
-        opt.selected = 'true'
-      } else {
-        opt.value = document.querySelector('#video-flash').src + "?stream=" + (i + 1)
-      }
+  files = []
 
-      selectFile.append(opt)
+  for(var i = 0; i<tracks; i++) {
+    if(i === 0) {
+      files.push({
+        name: 'Звуковая дорожка ' + (i+1),
+        src: document.querySelector('#video-flash').src,
+        mime: 'video/mp4'
+      })
+    } else {
+      files.push({
+        name: 'Звуковая дорожка ' + (i+1),
+        src: document.querySelector('#video-flash').src + '?stream=' + (i + 1),
+        mime: 'video/mp4'
+      })
     }
-  }
+  }  
 
-  let wrapper = document.createElement('div')
-  wrapper.className = 'counter'
-  wrapper.append(selectFile)
+  // if(tracks === 0) {
+  //   let opt = document.createElement('option')
+  //   opt.selected = 'true'
+  //   opt.innerHTML = 'File 1'
+  //   opt.value = document.querySelector('#video-flash').src
+  //   selectFile.append(opt)
+  // } else {
+  //   for(var i = 0; i < tracks; i++) {
+  //     let opt = document.createElement('option')
+  //     opt.innerHTML = 'File ' + (i + 1)
+      
+  //     if(i === 0) {
+  //       opt.value = document.querySelector('#video-flash').src
+  //       opt.selected = 'true'
+  //     } else {
+  //       opt.value = document.querySelector('#video-flash').src + "?stream=" + (i + 1)
+  //     }
 
-  document.getElementById('video-counters').append(wrapper)
+  //     selectFile.append(opt)
+  //   }
+  // }
 
-  let button = document.createElement('button', 'google-cast-button')
+  // let wrapper = document.createElement('div')
+  // wrapper.className = 'counter'
+  // wrapper.append(selectFile)
 
-  button.style.width = '35px'
-  button.style.height = '35px'
-  button.style.marginLeft = '10px'
+  // document.getElementById('video-counters').append(wrapper)
 
-  document.getElementById('video-counters').append(button)
+  // let button = document.createElement('button', 'google-cast-button')
 
-  let obj = {
-    //sources: sources
-    src: document.querySelector('#video-flash').src,
-    mime: 'video/mp4'
-  }
+  // button.style.width = '35px'
+  // button.style.height = '35px'
+  // button.style.marginLeft = '10px'
 
-  window.broadenReadyCallback(obj)
+  // document.getElementById('video-counters').append(button)
+
+  // let obj = {
+  //   //sources: sources
+  //   src: document.querySelector('#video-flash').src,
+  //   mime: 'video/mp4'
+  // }
+
+  window.broadenReadyCallback(files)
 }
 
 var check = function() {

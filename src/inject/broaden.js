@@ -7,13 +7,9 @@ window.broadencast.broadenData = false
 
 console.log('[broaden] Hello from broaden lib!')
 
-window.broadenDataCallback = function(data) {
+window.broadenReadyCallback = function(data) {
   console.log('[broaden] Received data from site injector')
   window.broadencast.broadenData = data
-}
-
-window.broadenReadyCallback = function(data) {
-  console.log('[broaden] Broaden ready!')
   window.broadencast.broadenReady = true
 }
 
@@ -44,6 +40,8 @@ window['__onGCastApiAvailable'] = function(isAvailable) {
 var everythingReady = function() {
   if(window.broadencast.element) {
     console.log('[broaden] Found GUI, ready to Cast')
+
+    pushState({ files: window.broadencast.broadenData })
 
     let player = new cast.framework.RemotePlayer()
     let playerController = new cast.framework.RemotePlayerController(player)

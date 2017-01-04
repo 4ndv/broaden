@@ -30,10 +30,15 @@ broaden-inner > header {
 
   font-weight: 700;
 
+  height: 45px;
   width: 100%;
   background: #0F0F0F;
   padding: 10px;
   color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 broaden-inner .broaden-disconnect-button {
@@ -51,6 +56,7 @@ broaden-inner > section {
 
 broaden-inner button {
   box-shadow: none;
+  background: none;
 }
 
 broaden-inner .broaden-castbutton {

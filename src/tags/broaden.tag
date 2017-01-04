@@ -25,7 +25,18 @@
           <div if={ !state.player.isMediaLoaded }>
             <p if={ state.files.length === 0 }>No files to play</p>
             <div if={ state.files.length > 0 }>
-              Files to play
+              <div class="pure-form">
+                <fieldset>
+                  <legend>Select file to play</legend>
+
+                  <select>
+                    <option>AL</option>
+                    <option>CA</option>
+                    <option>IL</option>
+                  </select>
+                  <button class="pure-button pure-button-primary">Play</button>
+                </fieldset>
+              </div>
             </div>
           </div>
           <div if={ state.player.isMediaLoaded }>
@@ -57,11 +68,6 @@
       let session = cast.framework.CastContext.getInstance().getCurrentSession()
 
       session.endSession(true)
-    }
-
-    // Show cast interface only if has devices and has media to cast
-    canCast() {
-      return this.state.hasDevices && this.state.hasMedia
     }
 
     this.on('mount', function() {
