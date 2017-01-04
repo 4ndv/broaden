@@ -36,6 +36,11 @@ broaden-inner > header {
   color: #fff;
 }
 
+broaden-inner .broaden-disconnect-button {
+  float: right;
+  font-size: 70%;
+}
+
 broaden-inner > section {
   border-radius: 0 0 5px 5px;
 

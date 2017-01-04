@@ -21,6 +21,10 @@ let pushState = function(state) {
   window.broadencast.element.trigger('updatestate', state)
 }
 
+let pushUpdate = function() {
+  window.broadencast.element.trigger('shouldupdate')
+}
+
 let initializeCastApi = function() {
   console.log('[broaden] Initializing Cast api')
   cast.framework.CastContext.getInstance().setOptions({
@@ -41,11 +45,10 @@ var everythingReady = function() {
   if(window.broadencast.element) {
     console.log('[broaden] Found GUI, ready to Cast')
 
+    let player = new cast.framework.RemotePlayer()
+    let playerController = new cast.framework.RemotePlayerController(player)
+
     let context = cast.framework.CastContext.getInstance()
-
-    console.log('[broaden] Fetching current state')
-
-    pushState({ castState: context.getCastState() })
 
     context.addEventListener(
       cast.framework.CastContextEventType.CAST_STATE_CHANGED,
@@ -54,26 +57,34 @@ var everythingReady = function() {
         pushState({ castState: event.castState })
       })
 
-    console.log('[broaden] Get current session state')
-
-    
-
     context.addEventListener(
       cast.framework.CastContextEventType.SESSION_STATE_CHANGED,
       function(event) {
-        switch (event.sessionState) {
-          case cast.framework.SessionState.SESSION_STARTED:
-            console.log('[broaden] Starting cast')
-            //window.broadenStartCast()
-            break
-          case cast.framework.SessionState.SESSION_RESUMED:
-            break
-          case cast.framework.SessionState.SESSION_ENDED:
-            console.log('[broaden] CastContext: CastSession disconnected');
-            // Update locally as necessary
-            break
-        }
+        console.log('[broaden] Received new session state')
+        pushState({ sessionState: event.sessionState })
       })
+
+    context.addEventListener(
+      cast.framework.RemotePlayerEventType.ANY_CHANGE,
+      function(event) {
+        console.log('[broaden] Received new player state')
+        pushState({ player: player })
+      })
+
+    console.log('[broaden] Fetching current Cast state')
+
+    pushState({ castState: context.getCastState() })
+
+    console.log('[broaden] Fetching current session state')
+
+    if(context.getCurrentSession()) {
+      pushState({ sessionState: context.getCurrentSession().sessionState })
+    }
+
+    console.log('[broaden] Fetching player')
+
+    pushState({ player: player })
+    console.log(player)
   } else {
     console.log('[broaden] Waiting for GUI')
     setTimeout(everythingReady, 500)

@@ -1,6 +1,6 @@
 <broaden>
   <broaden-inner>
-    <header>Broaden</header>
+    <header>Broaden<button if={ state.castState === cast.framework.CastState.CONNECTED } onclick={ disconnect } class="pure-button broaden-disconnect-button">Disconnect</button></header>
     <section>
       <div if={ Object.keys(state).length === 0 }>
         <p>Loading...</p>
@@ -21,13 +21,22 @@
         </div>
       </div>
       <div if={ state.castState === cast.framework.CastState.CONNECTED }>
-        <div class="broaden-inline">
-          <button onclick={ disconnect } class="pure-button">Disconnect</button>
+        <div if={ state.sessionState === cast.framework.SessionState.SESSION_STARTED }>
+          <div if={ !state.player.isMediaLoaded }>
+            <p if={ state.files.length === 0 }>No files to play</p>
+            <div if={ state.files.length > 0 }>
+              Files to play
+            </div>
+          </div>
+          <div if={ state.player.isMediaLoaded }>
+            Controls must be here
+          </div>
+        </div>
+        <div if={ state.sessionState !== cast.framework.SessionState.SESSION_STARTED }>
+          Looks like we connected, but session not started. Idk whats going on, so try to contact me here: <a href="https://github.com/4ndv/broaden/issues">https://github.com/4ndv/broaden/issues</a>
         </div>
       </div>
-      <div if={ state.sessionState === cast.framework.SessionState.SESSION_STARTED }>
-        
-      </div>
+      
     </section>
   </broaden-inner>
 
@@ -35,7 +44,8 @@
     this.state = {
       castState: false,
       sessionState: false,
-      media: false
+      media: false,
+      files: []
     }
 
     updateState(newState) {
@@ -62,6 +72,10 @@
     this.on('updatestate', function(state) {
       console.log('[broaden gui] State changed')
       this.updateState(state)
+    })
+
+    this.on('shouldupdate', function() {
+      this.update()
     })
   </script>
 </broaden>
