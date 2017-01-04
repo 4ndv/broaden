@@ -62,10 +62,11 @@ var everythingReady = function() {
         pushState({ sessionState: event.sessionState })
       })
 
-    context.addEventListener(
+    playerController.addEventListener(
       cast.framework.RemotePlayerEventType.ANY_CHANGE,
       function(event) {
         console.log('[broaden] Received new player state')
+        console.log(player)
         pushState({ player: player })
       })
 

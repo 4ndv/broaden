@@ -22,7 +22,7 @@
       </div>
       <div if={ state.castState === cast.framework.CastState.CONNECTED }>
         <div if={ state.sessionState === cast.framework.SessionState.SESSION_STARTED || state.sessionState === cast.framework.SessionState.SESSION_RESUMED }>
-          <div if={ !state.player.isMediaLoaded }>
+          <div if={ !state.player.isMediaLoaded && state.player.playerState !== chrome.cast.media.PlayerState.IDLE  }>
             <p if={ state.files.length === 0 }>No files to play</p>
             <div if={ state.files.length > 0 }>
               <div class="pure-form">
@@ -37,7 +37,7 @@
               </div>
             </div>
           </div>
-          <div if={ state.player.isMediaLoaded }>
+          <div if={ state.player.isMediaLoaded || state.player.playerState === chrome.cast.media.PlayerState.IDLE }>
             Controls must be here
           </div>
         </div>
