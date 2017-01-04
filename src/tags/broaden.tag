@@ -49,7 +49,7 @@
             <br />
             <div class="broaden-inline">
               <label>{ timeToString(state.player.currentTime) }</label>
-              <input class="broaden-range" type="range" onchange={ controlsTime } min="0" max={ state.player.duration } value={ state.player.currentTime*1000/1000 } />
+              <input class="broaden-range" type="range" onchange={ controlsTime } min="0" max={ state.player.duration } ref="timeControl" onmousedown={ () => { state.mouseOnSeek = true } } onmouseup={ () => { state.mouseOnSeek = false } }/>
               <label>{ timeToString(state.player.duration) }</label>
             </div>
           </div>
@@ -68,6 +68,7 @@
       media: false,
       player: false,
       finishing: false,
+      mouseOnSeek: false,
       files: []
     }
 
@@ -108,7 +109,7 @@
     }
 
     timeToString(time) {
-      let sec_num = parseInt(time, 10); // don't forget the second param
+      let sec_num = parseInt(time, 10);
       let hours   = Math.floor(sec_num / 3600);
       let minutes = Math.floor((sec_num - (hours * 3600)) / 60);
       let seconds = sec_num - (hours * 3600) - (minutes * 60);
@@ -122,6 +123,12 @@
     updateState(newState) {
       Object.assign(this.state, this.state, newState)
       this.update()
+    }
+
+    updateTimeControl() {
+      if(!this.state.mouseOnSeek) {
+        this.refs.timeControl.value = state.player.currentTime*1000/1000
+      }
     }
 
     disconnect() {
