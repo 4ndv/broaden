@@ -76,7 +76,7 @@ var everythingReady = function() {
     console.log('[broaden] Fetching current session state')
 
     if(context.getCurrentSession()) {
-      pushState({ sessionState: context.getCurrentSession().sessionState })
+      pushState({ sessionState: context.getCurrentSession().getSessionState() })
     }
 
     console.log('[broaden] Fetching player')
@@ -103,15 +103,6 @@ var everythingExceptGUIReady = function() {
     console.log('[broaden] Waiting for Cast API and Broaden injected script')
     setTimeout(everythingExceptGUIReady, 1000)
   }
-}
-
-window.broadenStartCast = function(data) {
-  var castSession = cast.framework.CastContext.getInstance().getCurrentSession()
-  var mediaInfo = new chrome.cast.media.MediaInfo(data.src, data.mime)
-  var request = new chrome.cast.media.LoadRequest(mediaInfo)
-  castSession.loadMedia(request).then(
-    function() { console.log('[broaden] Load succeed') },
-    function(errorCode) { alert('[broaden] Error code: ' + errorCode) });
 }
 
 everythingExceptGUIReady()

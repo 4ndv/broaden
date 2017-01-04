@@ -22,13 +22,13 @@ var ready = function() {
   for(var i = 0; i<tracks; i++) {
     if(i === 0) {
       files.push({
-        name: 'Звуковая дорожка ' + (i+1),
+        name: 'File ' + (i+1),
         src: document.querySelector('#video-flash').src,
         mime: 'video/mp4'
       })
     } else {
       files.push({
-        name: 'Звуковая дорожка ' + (i+1),
+        name: 'File ' + (i+1),
         src: document.querySelector('#video-flash').src + '?stream=' + (i + 1),
         mime: 'video/mp4'
       })

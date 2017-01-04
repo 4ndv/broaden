@@ -21,7 +21,7 @@
         </div>
       </div>
       <div if={ state.castState === cast.framework.CastState.CONNECTED }>
-        <div if={ state.sessionState === cast.framework.SessionState.SESSION_STARTED }>
+        <div if={ state.sessionState === cast.framework.SessionState.SESSION_STARTED || state.sessionState === cast.framework.SessionState.SESSION_RESUMED }>
           <div if={ !state.player.isMediaLoaded }>
             <p if={ state.files.length === 0 }>No files to play</p>
             <div if={ state.files.length > 0 }>
@@ -29,12 +29,10 @@
                 <fieldset>
                   <legend>Select file to play</legend>
 
-                  <select>
-                    <option>AL</option>
-                    <option>CA</option>
-                    <option>IL</option>
+                  <select ref="fileSelect">
+                    <option each={ item, i in state.files } value={ i }>{ item.name }</option>
                   </select>
-                  <button class="pure-button pure-button-primary">Play</button>
+                  <button class="pure-button pure-button-primary" onclick={ playSelectedFile }>Play</button>
                 </fieldset>
               </div>
             </div>
@@ -43,7 +41,7 @@
             Controls must be here
           </div>
         </div>
-        <div if={ state.sessionState !== cast.framework.SessionState.SESSION_STARTED }>
+        <div if={ state.sessionState !== cast.framework.SessionState.SESSION_STARTED && state.sessionState !== cast.framework.SessionState.SESSION_RESUMED }>
           Looks like we connected, but session not started. Idk whats going on, so try to contact me here: <a href="https://github.com/4ndv/broaden/issues">https://github.com/4ndv/broaden/issues</a>
         </div>
       </div>
@@ -57,6 +55,20 @@
       sessionState: false,
       media: false,
       files: []
+    }
+
+    playSelectedFile() {
+      let file = this.state.files[this.refs.fileSelect.value]
+
+      console.log('[broaden gui] Playing file:')
+      console.log(file)
+
+      let castSession = cast.framework.CastContext.getInstance().getCurrentSession()
+      let mediaInfo = new chrome.cast.media.MediaInfo(file.src, file.mime)
+      let request = new chrome.cast.media.LoadRequest(mediaInfo)
+      castSession.loadMedia(request).then(
+        function() { console.log('[broaden] Load succeed') },
+        function(errorCode) { alert('[broaden] Error code: ' + errorCode) });
     }
 
     updateState(newState) {
