@@ -37,9 +37,9 @@
         <div if={ state.sessionState === cast.framework.SessionState.SESSION_STARTED || state.sessionState === cast.framework.SessionState.SESSION_RESUMED }>
           <div if={ state.player.isMediaLoaded || state.player.playerState === chrome.cast.media.PlayerState.IDLE }>
             <div class="broaden-inline">
-              <button class="pure-button pure-button-primary broaden-fw-70" onclick={ controlsPlayPause }>{ state.player.isPaused ? 'Play' : 'Pause' }</button>
+              <button class="pure-button pure-button-primary" onclick={ controlsPlayPause }>{ state.player.isPaused ? 'Play' : 'Pause' }</button>
               <button class="pure-button pure-button-primary" onclick={ controlsStop }>Stop</button>
-              <button class="pure-button pure-button-primary broaden-fw-90" onclick={ controlsMuteUnmute }>{ state.player.isMuted ? 'Unmute' : 'Mute' }</button>
+              <button class="pure-button pure-button-primary" onclick={ controlsMuteUnmute }>{ state.player.isMuted ? 'Unmute' : 'Mute' }</button>
             </div>
             <br />
             <div class="broaden-inline">
