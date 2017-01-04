@@ -43,10 +43,10 @@ var everythingReady = function() {
 
     pushState({ files: window.broadencast.broadenData })
 
-    let player = new cast.framework.RemotePlayer()
-    let playerController = new cast.framework.RemotePlayerController(player)
-
     let context = cast.framework.CastContext.getInstance()
+
+    let castPlayer = new cast.framework.RemotePlayer()
+    let playerController = new cast.framework.RemotePlayerController(castPlayer)
 
     context.addEventListener(
       cast.framework.CastContextEventType.CAST_STATE_CHANGED,
@@ -66,8 +66,7 @@ var everythingReady = function() {
       cast.framework.RemotePlayerEventType.ANY_CHANGE,
       function(event) {
         console.log('[broaden] Received new player state')
-        console.log(player)
-        pushState({ player: player })
+        pushState({ player: castPlayer, controller: playerController })
       })
 
     console.log('[broaden] Fetching current Cast state')
@@ -82,8 +81,7 @@ var everythingReady = function() {
 
     console.log('[broaden] Fetching player')
 
-    pushState({ player: player })
-    console.log(player)
+    pushState({ player: castPlayer, controller: playerController })
   } else {
     console.log('[broaden] Waiting for GUI')
     setTimeout(everythingReady, 500)

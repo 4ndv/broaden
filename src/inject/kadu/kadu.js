@@ -3,19 +3,27 @@ var ready = function() {
 
   files = []
 
-  for(var i = 0; i<tracks; i++) {
-    if(i === 0) {
-      files.push({
-        name: 'File ' + (i+1),
-        src: document.querySelector('#video-flash').src,
-        mime: 'video/mp4'
-      })
-    } else {
-      files.push({
-        name: 'File ' + (i+1),
-        src: document.querySelector('#video-flash').src + '?stream=' + (i + 1),
-        mime: 'video/mp4'
-      })
+  if(tracks === 0) {
+    files.push({
+      name: 'File 1',
+      src: document.querySelector('#video-flash').src,
+      mime: 'video/mp4'
+    })
+  } else {
+    for(var i = 0; i<tracks; i++) {
+      if(i === 0) {
+        files.push({
+          name: 'File ' + (i+1),
+          src: document.querySelector('#video-flash').src,
+          mime: 'video/mp4'
+        })
+      } else {
+        files.push({
+          name: 'File ' + (i+1),
+          src: document.querySelector('#video-flash').src + '?stream=' + (i + 1),
+          mime: 'video/mp4'
+        })
+      }
     }
   }
 

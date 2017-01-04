@@ -57,18 +57,26 @@ broaden-inner > section {
 broaden-inner button {
   box-shadow: none;
   background: none;
+  text-shadow: none;
 }
 
 broaden-inner .broaden-castbutton {
-  width: 70px;
-  padding: 0;
+  width: 100%;
+  padding: 5px;
   height: 35px;
-  margin-left: 15px;
 }
 
 broaden-inner .broaden-inline {
   display: flex;
   align-items: center;
+}
+
+broaden-inner .broaden-fw-70 {
+  width: 70px;
+}
+
+broaden-inner .broaden-pw-100 {
+  width: 100%;
 }
 
 broaden-inner .broaden-inline > * {
