@@ -40,16 +40,12 @@
               <button class="pure-button pure-button-primary" onclick={ controlsPlayPause }>{ state.player.isPaused ? 'Play' : 'Pause' }</button>
               <button class="pure-button pure-button-primary" onclick={ controlsStop }>Stop</button>
               <button class="pure-button pure-button-primary" onclick={ controlsMuteUnmute }>{ state.player.isMuted ? 'Unmute' : 'Mute' }</button>
-            </div>
-            <br />
-            <div class="broaden-inline">
-              <label>Volume:</label>
               <input class="broaden-range" type="range" onchange={ controlsVolume } min="0" max="10" value={ state.player.volumeLevel * 10 } />
             </div>
             <br />
             <div class="broaden-inline">
               <label>{ timeToString(state.player.currentTime) }</label>
-              <input class="broaden-range" type="range" onchange={ controlsTime } min="0" max={ state.player.duration } ref="timeControl" onmousedown={ () => { state.mouseOnSeek = true } } onmouseup={ () => { state.mouseOnSeek = false } }/>
+              <input class="broaden-range" type="range" onchange={ controlsTime } min="0" max={ state.player.duration } ref="timeControl" onmousedown={ () => { this.state.mouseOnSeek = true } } onmouseup={ () => { this.state.mouseOnSeek = false } }/>
               <label>{ timeToString(state.player.duration) }</label>
             </div>
           </div>
@@ -127,7 +123,9 @@
 
     updateTimeControl() {
       if(!this.state.mouseOnSeek) {
-        this.refs.timeControl.value = state.player.currentTime*1000/1000
+        if(this.refs.timeControl) {
+          this.refs.timeControl.value = this.state.player.currentTime*1000/1000
+        }
       }
     }
 
@@ -168,6 +166,7 @@
 
     this.on('updatestate', function(state) {
       this.updateState(state)
+      this.updateTimeControl()
       this.disconnectIfNeed()
     })
 
