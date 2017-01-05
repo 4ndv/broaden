@@ -3,6 +3,20 @@ Broaden
 
 Chrome extension that adds chromecast support to some sites that don't have it
 
+## Installation
+
+1. Clone this repo or download [this zip file](https://github.com/4ndv/broaden/archive/master.zip) and unpack it
+2. Visit `chrome://extensions` and press `load unpacked extension`
+3. Select folder with `manifest.json` in it
+
+## Usage
+
+Visit video page of one of the supported sites and wait for Broaden panel to appear in the bottom of the screen. It looks like this:
+
+![example](http://i.imgur.com/soXXCfC.png)
+
+[Visit this page with installed Broaden to see example](http://kadu.ru/video/386683-Greiy-men-1_seriya_Malchik_kotoryiy_ohotitsya_na_Akuma)
+
 ## Supported sites
 
 kadu.ru
