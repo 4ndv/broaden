@@ -79,6 +79,10 @@ broaden-inner .broaden-inline > * {
   margin-right: 3px;
 }
 
+broaden-inner .broaden-inline :last-child {
+  margin-right: 0;
+}
+
 broaden-inner .broaden-fw-70 {
   width: 70px;
 }
