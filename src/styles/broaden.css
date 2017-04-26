@@ -64,6 +64,10 @@ broaden-inner button:focus {
   background: none;
 }
 
+broaden-inner .pure-button-primary:focus {
+  background-color: #0078e7;
+}
+
 broaden-inner .broaden-castbutton {
   width: 100%;
   padding: 5px;

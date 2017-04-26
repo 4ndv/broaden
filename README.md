@@ -25,6 +25,16 @@ kino.pub (requires PRO subscription)
 
 smotret-anime.ru
 
+## Troubleshoot
+
+#### Device available, but extension thinks that it's not available
+
+Refresh tab
+
+#### Something that not in this list
+
+[Create an issue on GitHub](https://github.com/4ndv/broaden/issues)
+
 ## License
 
 ```
